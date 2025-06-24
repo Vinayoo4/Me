@@ -15,7 +15,7 @@
           <div class="status-bar">
             <span class="status-item">● ONLINE</span>
             <span class="status-item">{{ currentTime }}</span>
-            <span class="status-item">EST. 2025</span>
+            <span class="status-item">EST. 2023</span>
           </div>
         </div>
       </div>
@@ -135,8 +135,7 @@
                     <span class="tech-tag" v-for="tech in project.technologies" :key="tech">{{ tech }}</span>
                   </div>
                   <div class="project-links">
-                    <a href="#" class="project-link">VIEW</a>
-                    <a href="#" class="project-link">CODE</a>
+                    <a v-for="link in project.links" :href="link.url" class="project-link" target="_blank" rel="noopener">{{ link.label }}</a>
                   </div>
                 </div>
               </div>
@@ -277,8 +276,8 @@ import { ref, reactive, onMounted, onUnmounted } from 'vue'
 // Personal Information
 const personalInfo = {
   name: 'Vinay Yadav',
-  title: 'Front Web Developer & Digital Craftsman',
-  intro: 'Welcome to my corner of the digital universe! I\'m a passionate Student, developer , Digital Marketer ,  who believes in writing clean, efficient code and creating meaningful digital experiences. This website is a tribute to the golden age of the web - when simplicity met functionality and every pixel had purpose.'
+  title: 'Student & Digital Craftsman',
+  intro: 'Welcome to my corner of the digital universe! I\'m a passionate Student, developer , Digital Marketer ,  who believes in World of Numbers, efficient code and creating meaningful digital experiences while having a passion for learning and growing. This website is a tribute to the golden age of the web - when simplicity met functionality and every pixel had purpose.'
 }
 
 // ASCII Art
@@ -312,7 +311,9 @@ const skills = [
       { name: 'Vue.js', level: 90 },
       { name: 'React', level: 85 },
       { name: 'HTML5/CSS3', level: 95 },
-      { name: 'Responsive Design', level: 90 }
+      { name: 'Responsive Design', level: 90 },
+      { name: 'Web Design & Development', level: 90 },
+      { name: 'Web Development Basics', level: 85 },
     ]
   },
   {
@@ -332,7 +333,35 @@ const skills = [
       { name: 'Docker', level: 80 },
       { name: 'VS Code', level: 95 },
       { name: 'Linux', level: 85 },
-      { name: 'CI/CD', level: 75 }
+      { name: 'CI/CD', level: 75 },
+      { name: 'Advanced Excel', level: 90 },
+    ]
+  },
+  {
+    name: 'Digital Skills',
+    items: [
+      { name: 'Digital Advertisement', level: 85 },
+      { name: 'Introduction to Digital Business Skills', level: 80 },
+      { name: 'Professional & Life Skills', level: 85 },
+      { name: 'Sales Specialist', level: 80 },
+      { name: 'Data Analytics & Visualization', level: 80 },
+      { name: 'Learn JavaScript', level: 80 },
+    ]
+  },
+  {
+    name: 'Business & Management',
+    items: [
+      { name: 'Investment Banking', level: 80 },
+      { name: 'Strategic Human Resource Management', level: 80 },
+      { name: 'Leadership & Motivation', level: 80 },
+      { name: 'Principles of Retailing', level: 80 },
+    ]
+  },
+  {
+    name: 'Mathematics & Analytics',
+    items: [
+      { name: 'Basic Mathematics', level: 85 },
+      { name: 'Data Analytics', level: 80 },
     ]
   },
   {
@@ -361,24 +390,84 @@ const skills = [
 // Projects Data
 const projects = [
   {
+    name: 'ResumeGen',
+    description: 'Build resumes online effortlessly.',
+    technologies: ['Vue.js', 'Web App'],
+    links: [
+      { label: 'VISIT', url: 'https://vinayoo4.github.io/resumegen/' }
+    ]
+  },
+  {
+    name: 'Virtual Whiteboard',
+    description: 'A plain whiteboard for drawing and teaching.',
+    technologies: ['JavaScript', 'Canvas'],
+    links: [
+      { label: 'VISIT', url: 'https://vinayoo4.github.io/Virtualwhiteboard/' }
+    ]
+  },
+  {
+    name: 'EmailDB',
+    description: 'A house of email database for marketing purposes.',
+    technologies: ['Vue.js', 'Web App'],
+    links: [
+      { label: 'VISIT', url: 'https://vinayoo4.github.io/Emaildb/' }
+    ]
+  },
+  {
+    name: 'Button Catalog',
+    description: 'A button catalog web app.',
+    technologies: ['Vercel', 'Web App'],
+    links: [
+      { label: 'VISIT', url: 'https://buttonpage-n6xbpcxv4-vinayoo4s-projects.vercel.app/' }
+    ]
+  },
+  {
+    name: 'Product Landing Page',
+    description: 'Landing page for products.',
+    technologies: ['Vue.js', 'HTML', 'CSS'],
+    links: [
+      { label: 'GITHUB', url: 'https://github.com/Vinayoo4/product_page' }
+    ]
+  },
+  {
+    name: 'Invoice Billing App',
+    description: 'Simple front end UI for invoicing and billing application with role-wise system.',
+    technologies: ['TypeScript', 'JavaScript'],
+    links: [
+      { label: 'GITHUB', url: 'https://github.com/Vinayoo4/inovice_billing' }
+    ]
+  },
+  {
+    name: 'Shree Nandi Marketing',
+    description: 'Web app for marketing agency.',
+    technologies: ['Web App', 'Netlify'],
+    links: [
+      { label: 'VISIT', url: 'https://shreenandimarketing.netlify.app' }
+    ]
+  },
+  {
     name: 'E-Commerce Platform',
     description: 'Full-stack e-commerce solution with payment integration and admin dashboard.',
-    technologies: ['Vue.js', 'Node.js', 'MongoDB', 'Stripe']
+    technologies: ['Vue.js', 'Node.js', 'MongoDB', 'Stripe'],
+    links: []
   },
   {
     name: 'Task Management App',
     description: 'Collaborative task management tool with real-time updates and team features.',
-    technologies: ['React', 'Express', 'Socket.io', 'PostgreSQL']
+    technologies: ['React', 'Express', 'Socket.io', 'PostgreSQL'],
+    links: []
   },
   {
     name: 'Weather Dashboard',
     description: 'Interactive weather dashboard with data visualization and location services.',
-    technologies: ['JavaScript', 'Chart.js', 'Weather API', 'CSS3']
+    technologies: ['JavaScript', 'Chart.js', 'Weather API', 'CSS3'],
+    links: []
   },
   {
     name: 'Portfolio Website',
     description: 'This very website! A 90s-inspired personal portfolio with modern functionality.',
-    technologies: ['Vue.js', 'Express.js', 'CSS3', 'Node.js']
+    technologies: ['Vue.js', 'Express.js', 'CSS3', 'Node.js'],
+    links: []
   }
 ]
 
@@ -392,8 +481,9 @@ const contactInfo = [
 // Social Links
 const socialLinks = [
   { name: 'GitHub', icon: '🐙', url: 'https://github.com/Vinayoo4' },
-  { name: 'LinkedIn', icon: '💼', url: 'https://linkedin.com/in/vinayyadav36' },
-  { name: 'Portfolio', icon: '🌐', url: 'https://github.com/Vinayoo4/me' }
+  { name: 'LinkedIn', icon: '💼', url: 'https://www.linkedin.com/in/vinay-yadav-b517a4244?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app' },
+  { name: 'Portfolio', icon: '🌐', url: 'https://me-sigma-red.vercel.app/' },
+  { name: 'Drive', icon: '🐙', url: 'https://drive.google.com/drive/folders/15SOjZWy2sj2gBoB-nQ6dcKeY9Ewu_Zvo?usp=sharing' }
 ]
 
 // Form handling
@@ -494,48 +584,31 @@ const submitForm = async () => {
   }
 }
 
-// Get visitor count
-const getVisitorCount = async () => {
+// Only keep the following for visitor counter:
+let visitorInterval: number | undefined
+
+const fetchVisitorCount = async () => {
   try {
-    const response = await fetch(`${API_BASE}/visitors`);
-    if (!response.ok) {
-      throw new Error(`Server error: ${response.status} ${response.statusText}`);
+    const response = await fetch(`${API_BASE}/visitors`)
+    const data = await response.json()
+    if (data.success) {
+      visitorCount.value = data.count
     }
-    const data = await response.json();
-    visitorCount.value = data.count;
   } catch (error) {
-    const err = error instanceof Error ? error : new Error(String(error));
-    console.error('Failed to fetch visitor count:', err.message);
+    // Optionally handle error
   }
 }
 
-// Track visitor
-const trackVisitor = async () => {
-  try {
-    if (!localStorage.getItem('hasVisited')) {
-      await fetch(`${API_BASE}/visitors`, { method: 'POST' });
-      localStorage.setItem('hasVisited', 'true');
-    }
-  } catch (error) {
-    console.error('Failed to track visitor:', error);
-  }
-};
-
-onMounted(async () => {
-  try {
-    await trackVisitor();
-  } catch (e) {
-    console.error('Failed to track visitor:', e);
-  }
-  await getVisitorCount();
-  updateTime();
-  timeInterval = window.setInterval(updateTime, 1000);
-});
+onMounted(() => {
+  fetchVisitorCount()
+  visitorInterval = setInterval(fetchVisitorCount, 5000)
+  updateTime()
+  timeInterval = window.setInterval(updateTime, 1000)
+})
 
 onUnmounted(() => {
-  if (timeInterval) {
-    clearInterval(timeInterval)
-  }
+  if (timeInterval) clearInterval(timeInterval)
+  if (visitorInterval) clearInterval(visitorInterval)
 })
 </script>
 

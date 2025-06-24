@@ -50,33 +50,104 @@
 <script setup lang="ts">
 const certifications = [
   {
-    name: 'Vue.js Certified Developer',
-    issuer: 'Vue Mastery',
-    date: 'Dec 2023',
+    name: 'Data Analytics and Visualization',
+    issuer: 'Accenture | FORAGE',
+    date: 'May 2024',
     icon: '📜',
-    url: '#'
+    url: 'https://drive.google.com/file/d/14E6UOV1H8x3KA0p885eSKmCseuy-jjG5/view?usp=sharing'
   },
   {
-    name: 'AWS Certified Cloud Practitioner',
-    issuer: 'Amazon Web Services',
-    date: 'Jun 2023',
+    name: 'INVESTMENT BANKING ',
+    issuer: 'J.P Morgan | FORAGE',
+    date: 'May 2024',
     icon: '📜',
-    url: '#'
+    url: 'https://drive.google.com/file/d/14E6UOV1H8x3KA0p885eSKmCseuy-jjG5/view?usp=sharing'
   },
   {
-    name: 'Full-Stack Web Development',
-    issuer: 'CodeAcademy',
-    date: 'Jan 2022',
+    name: 'Web Development Basics',
+    issuer: 'IBM SKILL BUILD',
+    date: 'MAY 2024',
     icon: '📜',
-    url: '#'
+    url: 'https://drive.google.com/file/d/12kfjX4O41r71fqCz57qX6OqrQsBPxP5O/view?usp=sharing'
   },
   {
-    name: 'Advanced TypeScript',
-    issuer: 'Udemy',
-    date: 'May 2022',
+    name: 'Learn JavaScript',
+    issuer: 'IBM SKILL BUILD | CodeAcademy',
+    date: 'MAY 2024',
     icon: '📜',
-    url: '#'
-  }
+    url: 'https://drive.google.com/file/d/12pqwYs2mbyaqrtOWOyHG7cg1NdrNyPA-/view?usp=sharing'
+  },
+  {
+    name: 'WEB DESIGN & DEVELOPMENT',
+    issuer: 'NSDC',
+    date: 'JUN 2025',
+    icon: '📜',
+    url: 'https://drive.google.com/file/d/1_Kip75Sv5FIS3Azhac3fC6u_9XHK1oNs/view?usp=sharing'
+  },
+  {
+    name: 'INTRODUCTION TO DIGITAL BUSINESS SKILLS',
+    issuer: 'HP LIFE | HP FOUNDATION',
+    date: 'AUG 2023',
+    icon: '📜',
+    url: 'https://drive.google.com/file/d/13nW8kTdoYz7D88XR3dWJNXe9RfSs1fTY/view?usp=sharing'
+  },
+  {
+    name: 'STRATEGIC HUMAN RESOURCE MANAGEMENT',
+    issuer: 'AMITY UNIVERSITY',
+    date: 'MAY 2024',
+    icon: '📜',
+    url: 'https://drive.google.com/file/d/10EUlHQbPLrg2gFNaOVw9DZAeMq0iIq8V/view?usp=sharing'
+  },
+  {
+    name: 'LEADERSHIP AND MOTIVATION IN ORGANIZATIONS',
+    issuer: 'AMITY UNIVERSITY',
+    date: 'NOV 2024',
+    icon: '📜',
+    url: 'https://drive.google.com/file/d/14aHR-E3fMbJ2if3ogxZDYwy_mHnJYhaM/view?usp=sharing'
+  },
+  {
+    name: 'PRINCIPLES OF RETAILING',
+    issuer: 'AMITY UNIVERSITY',
+    date: 'NOV 2024',
+    icon: '📜',
+    url: 'https://drive.google.com/file/d/14SVfG01D9im4FH3SeRT3C50Q0CB3LU_m/view?usp=sharing'
+  },
+   {
+    name: 'PROFESSIONAL AND LIFE SKILLS',
+    issuer: 'AMITY UNIVERSITY',
+    date: 'OCT 2023',
+    icon: '📜',
+    url: 'https://drive.google.com/file/d/14JAWAq0KVtngv4VOlXRAhI7-TkxgxH14/view?usp=sharing'
+  },
+  {
+    name: 'SALES SPECIALIST',
+    issuer: 'GROMO',
+    date: 'JUN 2023',
+    icon: '📜',
+    url: 'https://drive.google.com/file/d/10ckfiVgiwt0iCwv-aHPICyGVVjQQNTKB/view?usp=sharing'
+  },
+   {
+    name: 'DIGITAL ADVERTISMENT',
+    issuer: 'ALEPH',
+    date: 'JUN 2023',
+    icon: '📜',
+    url: 'https://drive.google.com/file/d/1-xLh0e20C2si-V4rmYq6aKLrSzgzgdSJ/view?usp=sharing'
+  },
+   {
+    name: 'BASIC MATHEMATICS',
+    issuer: 'ALEPH',
+    date: 'APR 2024',
+    icon: '📜',
+    url: 'https://drive.google.com/file/d/100Clu-OAfD08eanD5MWkJrEMfEtUvWZW/view?usp=sharing'
+  },
+   {
+    name: 'ADVANCED EXCEL',
+    issuer: 'AMITY UNIVERSITY',
+    date: 'NOV 2024',
+    icon: '📜',
+    url: 'https://drive.google.com/file/d/14R5l2uJCIaZu921-5ZXnKDInId0pS0oQ/view?usp=sharing'
+  },
+
 ];
 </script>
 
