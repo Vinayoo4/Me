@@ -508,11 +508,14 @@ const getVisitorCount = async () => {
 // Track visitor
 const trackVisitor = async () => {
   try {
-    await fetch(`${API_BASE}/visitors`, { method: 'POST' })
+    if (!localStorage.getItem('hasVisited')) {
+      await fetch(`${API_BASE}/visitors`, { method: 'POST' });
+      localStorage.setItem('hasVisited', 'true');
+    }
   } catch (error) {
-    console.error('Failed to track visitor:', error)
+    console.error('Failed to track visitor:', error);
   }
-}
+};
 
 onMounted(async () => {
   try {
