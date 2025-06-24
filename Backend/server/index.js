@@ -246,10 +246,12 @@ app.post('/api/visitors', async (req, res) => {
       message: 'Failed to track visitor'
     })
   }
+  res.json({ count: visitorCount});
 })
 
 // Get visitor count
 app.get('/api/visitors', async (req, res) => {
+  console.log('GET /api/visitors called');
   try {
     const visitorData = await readJsonFile(VISITORS_FILE) || { count: 0, visits: [] }
     res.json({
