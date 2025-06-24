@@ -14,7 +14,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const app = express()
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 8080
 
 // Data file paths
 const DATA_DIR = path.join(__dirname, 'data')
@@ -246,7 +246,6 @@ app.post('/api/visitors', async (req, res) => {
       message: 'Failed to track visitor'
     })
   }
-  res.json({ count: visitorCount});
 })
 
 // Get visitor count
