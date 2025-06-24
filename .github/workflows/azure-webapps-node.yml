@@ -18,25 +18,33 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
+          cache: 'npm'
+          cache-dependency-path: Backend/server/package-lock.json
 
       - name: Install dependencies
-        run: npm install
         working-directory: ./Backend/server
+        run: |
+          npm install
+          npm run build --if-present
 
-      - name: Build (if needed)
-        run: npm run build --if-present
+      - name: Prepare for deployment
         working-directory: ./Backend/server
+        run: |
+          echo "Installing production dependencies only..."
+          rm -rf node_modules
+          npm ci --only=production
 
       - name: Zip artifact for deployment
-        # Run from the root, zip only the backend folder, and exclude node_modules
-        run: zip -r release.zip ./Backend/server -x "./Backend/server/node_modules/*"
+        run: |
+          cd Backend/server
+          zip -r ../../release.zip ./*
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: release.zip # The zip file is now in the root
+          package: release.zip
 
 # This workflow will build and push a node.js application to an Azure Web App when a commit is pushed to your default branch.
 #
