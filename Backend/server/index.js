@@ -6,6 +6,9 @@ import { body, validationResult } from 'express-validator'
 import fs from 'fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import axios from 'axios'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -132,6 +135,40 @@ app.post('/api/contact',
       
       // Save contacts
       const saved = await writeJsonFile(CONTACTS_FILE, contacts)
+
+      // Send email to admin using EmailJS REST API
+      try {
+        await axios.post('https://api.emailjs.com/api/v1.0/email/send', {
+          service_id: process.env.EMAILJS_SERVICE_ID,
+          template_id: process.env.EMAILJS_ADMIN_TEMPLATE_ID,
+          user_id: process.env.EMAILJS_PUBLIC_KEY,
+          template_params: {
+            from_name: name,
+            from_email: email,
+            message: message
+          }
+        });
+      } catch (emailError) {
+        console.error('Failed to send email via EmailJS:', emailError.response?.data || emailError.message);
+      }
+
+      // Schedule a follow-up review request to the user after 1 minute
+      setTimeout(async () => {
+        try {
+          await axios.post('https://api.emailjs.com/api/v1.0/email/send', {
+            service_id: process.env.EMAILJS_SERVICE_ID,
+            template_id: process.env.EMAILJS_REVIEW_TEMPLATE_ID,
+            user_id: process.env.EMAILJS_PUBLIC_KEY,
+            template_params: {
+              to_email: email,
+              to_name: name
+              // Add more params as needed by your template
+            }
+          });
+        } catch (reviewEmailError) {
+          console.error('Failed to send review request via EmailJS:', reviewEmailError.response?.data || reviewEmailError.message);
+        }
+      }, 60000); // 1 minute delay (60000 ms)
       
       if (saved) {
         res.json({
