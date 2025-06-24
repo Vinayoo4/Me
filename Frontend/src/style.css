@@ -1,0 +1,146 @@
+/* Global Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Root Variables */
+:root {
+  --primary-font: 'Courier New', monospace;
+  --serif-font: 'Times New Roman', serif;
+  --base-font-size: 16px;
+  --line-height: 1.6;
+  
+  /* Colors */
+  --black: #000000;
+  --white: #ffffff;
+  --gray-light: #f9f9f9;
+  --gray-medium: #cccccc;
+  --gray-dark: #666666;
+  --red: #ff0000;
+  --green: #008000;
+}
+
+/* Base Styles */
+html {
+  font-size: var(--base-font-size);
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--primary-font);
+  line-height: var(--line-height);
+  color: var(--black);
+  background-color: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+  font-family: var(--primary-font);
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+a {
+  color: var(--black);
+  text-decoration: underline;
+  transition: opacity 0.3s ease;
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+/* Form Elements */
+input, textarea, button {
+  font-family: var(--primary-font);
+}
+
+/* Selection Styles */
+::selection {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+::-moz-selection {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+/* Focus Styles for Accessibility */
+:focus {
+  outline: 2px solid var(--black);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--black);
+  outline-offset: 2px;
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.text-mono {
+  font-family: var(--primary-font);
+}
+
+.text-serif {
+  font-family: var(--serif-font);
+}
+
+.border-black {
+  border: 1px solid var(--black);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  :root {
+    --gray-medium: #808080;
+  }
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .header,
+  .footer {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .content-box {
+    border: 1px solid black !important;
+  }
+}
+</style>
