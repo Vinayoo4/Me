@@ -497,11 +497,15 @@ const submitForm = async () => {
 // Get visitor count
 const getVisitorCount = async () => {
   try {
-    const response = await fetch(`${API_BASE}/visitors`)
-    const data = await response.json()
-    visitorCount.value = data.count
+    const response = await fetch(`${API_BASE}/visitors`);
+    if (!response.ok) {
+      throw new Error(`Server error: ${response.status} ${response.statusText}`);
+    }
+    const data = await response.json();
+    visitorCount.value = data.count;
   } catch (error) {
-    console.error('Failed to fetch visitor count:', error)
+    const err = error instanceof Error ? error : new Error(String(error));
+    console.error('Failed to fetch visitor count:', err.message);
   }
 }
 
