@@ -8,6 +8,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import axios from 'axios'
 import dotenv from 'dotenv'
+import { MongoClient } from 'mongodb'
 dotenv.config()
 
 const __filename = fileURLToPath(import.meta.url)
@@ -20,6 +21,20 @@ const PORT = process.env.PORT || 8080
 const DATA_DIR = path.join(__dirname, 'data')
 const CONTACTS_FILE = path.join(DATA_DIR, 'contacts.json')
 const VISITORS_FILE = path.join(DATA_DIR, 'visitors.json')
+
+// MongoDB setup
+const MONGO_URI = process.env.MONGO_URI; // Set this in Azure config!
+const DB_NAME = 'mydb'; // You can change this
+const COLLECTION = 'visitors';
+let cachedClient = null;
+
+async function getDb() {
+  if (!cachedClient) {
+    cachedClient = new MongoClient(MONGO_URI);
+    await cachedClient.connect();
+  }
+  return cachedClient.db(DB_NAME);
+}
 
 // Middleware
 app.use(helmet())
@@ -214,57 +229,33 @@ app.get('/api/contacts', async (req, res) => {
   }
 })
 
-// Track visitor
+// Track visitor (MongoDB version)
 app.post('/api/visitors', async (req, res) => {
   try {
-    const visitorData = await readJsonFile(VISITORS_FILE) || { count: 0, visits: [] }
-    
-    const visit = {
-      timestamp: new Date().toISOString(),
-      ip: req.ip || req.connection.remoteAddress,
-      userAgent: req.get('User-Agent') || 'Unknown'
-    }
-    
-    visitorData.count += 1
-    visitorData.visits.push(visit)
-    
-    // Keep only last 1000 visits to prevent file from growing too large
-    if (visitorData.visits.length > 1000) {
-      visitorData.visits = visitorData.visits.slice(-1000)
-    }
-    
-    await writeJsonFile(VISITORS_FILE, visitorData)
-    
-    res.json({
-      success: true,
-      count: visitorData.count
-    })
+    const db = await getDb();
+    const result = await db.collection(COLLECTION).findOneAndUpdate(
+      { _id: 'counter' },
+      { $inc: { count: 1 } },
+      { upsert: true, returnDocument: 'after' }
+    );
+    res.json({ success: true, count: result.value.count });
   } catch (error) {
-    console.error('Visitor tracking error:', error)
-    res.status(500).json({
-      success: false,
-      message: 'Failed to track visitor'
-    })
+    console.error('Visitor tracking error:', error);
+    res.status(500).json({ success: false, message: 'Failed to track visitor' });
   }
-})
+});
 
-// Get visitor count
+// Get visitor count (MongoDB version)
 app.get('/api/visitors', async (req, res) => {
-  console.log('GET /api/visitors called');
   try {
-    const visitorData = await readJsonFile(VISITORS_FILE) || { count: 0, visits: [] }
-    res.json({
-      success: true,
-      count: visitorData.count
-    })
+    const db = await getDb();
+    const doc = await db.collection(COLLECTION).findOne({ _id: 'counter' });
+    res.json({ success: true, count: doc?.count || 0 });
   } catch (error) {
-    console.error('Get visitor count error:', error)
-    res.status(500).json({
-      success: false,
-      count: 0
-    })
+    console.error('Get visitor count error:', error);
+    res.status(500).json({ success: false, count: 0 });
   }
-})
+});
 
 // Analytics endpoint (admin - in production, add authentication)
 app.get('/api/analytics', async (req, res) => {
